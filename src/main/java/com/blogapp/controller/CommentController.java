@@ -20,7 +20,8 @@ public class CommentController {
 	
 	@Autowired
 	private CommentServiceImpl commentServiceImpl;
-	
+
+	//post api
 	@PostMapping
 	public ResponseEntity<String> addComment
 	(@PathVariable int postId,@RequestBody Comment comment){
