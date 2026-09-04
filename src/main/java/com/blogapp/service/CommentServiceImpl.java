@@ -1,5 +1,7 @@
 package com.blogapp.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,6 +33,15 @@ public class CommentServiceImpl implements CommentService {
 		else {
 			return false;
 		}
+	}
+
+	@Override
+	public List<Comment> getCommentsByPostId(int postId) {
+		Post post = postServiceImpl.getById(postId);
+		if (post != null) {
+			return commentRepository.findByPost(post);
+		}
+		return List.of();
 	}
 
 }

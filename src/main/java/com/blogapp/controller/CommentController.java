@@ -1,8 +1,11 @@
 package com.blogapp.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,5 +41,15 @@ public class CommentController {
 		}
 		
 	}
-	
+
+	@GetMapping
+	public ResponseEntity<List<Comment>> getCommentsByPostId(@PathVariable int postId) {
+		List<Comment> comments = commentServiceImpl.getCommentsByPostId(postId);
+		if (!comments.isEmpty()) {
+			return new ResponseEntity<>(comments, HttpStatus.OK);
+		} else {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+		}
+	}
+
 }
